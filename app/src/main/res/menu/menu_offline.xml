@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_offline"
+        android:icon="@drawable/arrow_down"
+        app:showAsAction="ifRoom"
+        android:title="@string/offline" />
+
+    <item
+        android:id="@+id/action_online"
+        android:icon="@drawable/ic_input_black_48dp"
+        app:showAsAction="ifRoom"
+        android:title="@string/offline" />
+</menu>
