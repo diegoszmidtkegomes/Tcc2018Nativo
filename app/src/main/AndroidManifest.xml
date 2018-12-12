@@ -31,7 +31,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
         </activity>
-        <activity android:name=".view.EscolhaCadastroActivity"></activity>
+        <activity android:name=".view.EscolhaCadastroActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+
+        </activity>
         <activity android:name=".view.ImagemActivity" />
         <activity android:name=".view.CapturarImagemActivity" />
         <service

@@ -216,37 +216,42 @@ public class MainActivity extends AppCompatActivity implements iAsyncResponseObj
                     public void onItemClick(View view, final int position) {
                         posicaoSelecionada = position;
 
-                        if((carroList ==null || carroList.size() == 0)  && (carroListOnline ==null ||
-                                carroListOnline.size() == 0) ){
-                            buscarListaCarros();
-                        }
-                        else{
-                            Carro carro;
-                            CarroWS carroWs = null;
-                            int id;
-                            if(carroList!=null){
-                                carro = carroList.get(posicaoSelecionada);
-                                id = carro.getId();
+                        try{
+                            if((carroList ==null || carroList.size() == 0)  && (carroListOnline ==null ||
+                                    carroListOnline.size() == 0) ){
+                                buscarListaCarros();
                             }
                             else{
-                                carroWs = carroListOnline.get(posicaoSelecionada);
-                                id = 0;
-                            }
-                            try {
-                                Intent escolha = new Intent(
-                                        MainActivity.this,
-                                        EscolhaActivity.class);
-                                //escolha.putExtra("Carro", carro);
-                                //Bundle bundle = new Bundle();
-                                //bundle.putSerializable(getString(R.string.idCarro), id);
-                                escolha.putExtra("carroWs", carroWs);
-                                escolha.putExtra("id", id);
-                                startActivity(escolha);
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
+                                Carro carro;
+                                CarroWS carroWs = null;
+                                int id;
+                                if(carroList!=null){
+                                    carro = carroList.get(posicaoSelecionada);
+                                    id = carro.getId();
+                                }
+                                else{
+                                    carroWs = carroListOnline.get(posicaoSelecionada);
+                                    id = 0;
+                                }
+                                try {
+                                    Intent escolha = new Intent(
+                                            MainActivity.this,
+                                            EscolhaActivity.class);
+                                    //escolha.putExtra("Carro", carro);
+                                    //Bundle bundle = new Bundle();
+                                    //bundle.putSerializable(getString(R.string.idCarro), id);
+                                    escolha.putExtra("carroWs", carroWs);
+                                    escolha.putExtra("id", id);
+                                    startActivity(escolha);
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
                             }
                         }
-
+                        catch (Exception ex){
+                            ex.printStackTrace();
+                            restartAct();
+                        }
 
                     }
                 })
@@ -255,5 +260,11 @@ public class MainActivity extends AppCompatActivity implements iAsyncResponseObj
         mAdapter = new CarrosAdapter((ArrayList<Carro>) carroList, (ArrayList<CarroWS>)carroListOnline,  mRecyclerView, this);
         mRecyclerView.setAdapter(mAdapter);
 
+    }
+
+    private void restartAct() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
